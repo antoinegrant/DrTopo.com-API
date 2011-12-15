@@ -1,0 +1,23 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  database: items_development
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+  # database: ff_dynamic_dev_v7
+  # username: shaggy_auth
+  # password: shaggy1234
+  # host: fury
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: items_test
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
