@@ -2,8 +2,6 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/activerecord'
 
-#set :database, 'mysql://agrantmysql1:Climbing111@mysq.drtopo.co/drtopov4'
-
 ActiveRecord::Base.establish_connection(
   :adapter  => 'mysql2',
   :socket   => '/tmp/mysql.sock',
@@ -13,8 +11,10 @@ ActiveRecord::Base.establish_connection(
   :encoding => 'utf8'
 )
 
+environment = (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
+
 get '/' do
-  "Hello World!!!"
+  "Hello World!!! #{environment}"
 end
 
 __END__
