@@ -1,8 +1,6 @@
 require 'sinatra'
 require 'active_record'
 
-environment = (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
-
 db_config = YAML::load(IO.read('config/database.yml'))["#{environment}"]
 ActiveRecord::Base.establish_connection(
   :adapter  => db_config['adapter'],
