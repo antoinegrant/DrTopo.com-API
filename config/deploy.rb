@@ -44,7 +44,7 @@ namespace :deploy do
   desc "Restart Application"
   task :restart, :roles => :app do
     run "bundle"
-    run "rake db:migrate"
+    #run "rake db:migrate"
     run "touch #{current_release}/tmp/restart.txt"
   end
 end
