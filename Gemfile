@@ -6,3 +6,7 @@ gem 'rack'
 gem 'rake'
 gem 'activerecord'
 gem 'mysql2'
+
+group :production do
+  gem 'slogger'
+end
