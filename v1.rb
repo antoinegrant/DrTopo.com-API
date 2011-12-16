@@ -14,6 +14,11 @@ ActiveRecord::Base.establish_connection(
   :encoding => db_config['encoding']
 )
 
+class Products < ActiveRecord::Base
+end
+
 get '/' do
   "Hello world! #{environment}"
+  product = Products.find(:all).first
+  "#{product.to_json}"
 end
