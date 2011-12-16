@@ -17,6 +17,10 @@ ActiveRecord::Base.establish_connection(
 class Products < ActiveRecord::Base
 end
 
+before do
+  ActiveRecord::Base.connection.verify!
+end
+
 get '/' do
   "Hello world! #{environment}"
   product = Products.find(:all).first
