@@ -21,7 +21,7 @@ before do
   ActiveRecord::Base.connection.verify!
 end
 
-get '/' do
+get '/hello' do
   "Hello world! #{environment}"
   product = Products.find(:all).first
   "#{product.to_json}"
