@@ -33,17 +33,23 @@ set :use_sudo, false
 
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
+  desc "Starting api.DrTopo.co"
   task :start, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
+    run "cd $HOME/api.drtopo.co/current && passenger start -p 8100 -e production --pid-file $HOME/api.drtopo.co.pid --log-file $HOME/api.drtopo.co.log > /dev/null & disown"
   end
-
+  
+  desc "Get the status of api.DrTopo.co"
+  task :status, :role => :app do
+    run "passenger status --pid-file api.drtopo.co.pid"
+  end
+  
+  desc "Stoping api.DrTopo.co"
   task :stop, :roles => :app do
-    # Do nothing.
+    run "passenger stop --pid-file $HOME/api.drtopo.co.pid"
   end
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "ls -al"
     run "cd #{current_release} && bundle install"
     run "cd #{current_release} && rake db:migrate RACK_ENV=production"
     run "touch #{current_release}/tmp/restart.txt"
