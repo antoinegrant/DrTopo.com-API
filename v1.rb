@@ -9,4 +9,5 @@ get '/hello' do
   "Hello world! #{@environment}"
   product = Product.find(:all).first
   "#{product.to_json}"
+  "Yo"
 end
