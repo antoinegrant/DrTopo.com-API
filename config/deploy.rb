@@ -35,7 +35,7 @@ set :use_sudo, false
 namespace :deploy do
   desc "Starting api.DrTopo.co"
   task :start, :roles => :app do
-    run "passenger start -p 8100 #{current_release} -e production --pid-file $HOME/api.drtopo.co.pid --log-file $HOME/api.drtopo.co.log > /dev/null & disown"
+    run "passenger start -p 8100 $HOME/api.drtopo.co/current -e production --pid-file $HOME/api.drtopo.co.pid --log-file $HOME/api.drtopo.co.log > /dev/null & disown"
   end
   
   desc "Get the status of api.DrTopo.co"
