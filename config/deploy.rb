@@ -35,11 +35,11 @@ set :use_sudo, false
 namespace :deploy do
   desc "Starting api.DrTopo.co"
   task :start, :roles => :app do
-    run "cd $HOME/api.drtopo.co/current && passenger start -p 8100 -e production --pid-file $HOME/api.drtopo.co.pid --log-file $HOME/api.drtopo.co.log > /dev/null & disown"
+    run "passenger start -p 8100 #{current_release} -e production --pid-file $HOME/api.drtopo.co.pid --log-file $HOME/api.drtopo.co.log > /dev/null & disown"
   end
   
   desc "Get the status of api.DrTopo.co"
-  task :status, :role => :app do
+  task :status, :roles => :app do
     run "passenger status --pid-file api.drtopo.co.pid"
   end
   
@@ -50,8 +50,8 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "cd $HOME/api.drtopo.co/current && bundle install"
-    run "cd $HOME/api.drtopo.co/current && rake db:migrate RACK_ENV=production"
-    run "cd $HOME/api.drtopo.co/current && touch tmp/restart.txt"
+    run "cd #{current_release} && bundle install"
+    run "cd #{current_release} && rake db:migrate RACK_ENV=production"
+    run "cd #{current_release} && touch tmp/restart.txt"
   end
 end
