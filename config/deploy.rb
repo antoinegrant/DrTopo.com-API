@@ -50,8 +50,8 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "cd #{current_release} && bundle install"
-    run "cd #{current_release} && rake db:migrate RACK_ENV=production"
-    run "touch #{current_release}/tmp/restart.txt"
+    run "cd $HOME/api.drtopo.co/current && bundle install"
+    run "cd $HOME/api.drtopo.co/current && rake db:migrate RACK_ENV=production"
+    run "cd $HOME/api.drtopo.co/current && touch tmp/restart.txt"
   end
 end
