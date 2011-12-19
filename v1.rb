@@ -6,7 +6,10 @@ before do
 end
 
 get '/hello' do
-  "Hello world! #{@environment}"
   product = Product.find(:all).first
-  "#{product.to_json}"
+  product.to_json
+end
+
+get '/env' do
+  {'env' => settings.environment}.to_json
 end

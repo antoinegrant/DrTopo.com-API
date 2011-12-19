@@ -1,9 +1,10 @@
 require 'sinatra'
 require 'active_record'
+require 'json'
 
-@environment = (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
+set :environment, (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
 
-db_config = YAML::load(IO.read('config/database.yml'))["#{@environment}"]
+db_config = YAML::load(IO.read('config/database.yml'))["#{settings.environment}"]
 ActiveRecord::Base.establish_connection(
   :adapter  => db_config['adapter'],
   :host     => db_config['host'],
