@@ -1,6 +1,3 @@
-module API
-  class V1 < Sinatra::Base
-    class Product < ActiveRecord::Base
-    end
-  end
+require 'active_record'
+class Product < ActiveRecord::Base
 end

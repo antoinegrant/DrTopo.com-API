@@ -51,7 +51,7 @@ namespace :deploy do
   desc "Restart Application"
   task :restart, :roles => :app do
     run "cd #{current_release} && bundle install"
-    #run "cd #{current_release} && rake db:migrate RACK_ENV=production"
+    run "cd #{current_release} && rake db:migrate RACK_ENV=production"
     run "cd #{current_release} && touch tmp/restart.txt"
   end
 end
