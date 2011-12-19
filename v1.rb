@@ -2,7 +2,6 @@ require File.expand_path('../models/product', __FILE__)
 
 module API
   class V1 < Sinatra::Base
-    register ::Sinatra::Namespace
     
     configure do
       ::ActiveRecord::Base.configurations = YAML::load(IO.read('config/database.yml'))

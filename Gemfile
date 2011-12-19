@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rack'
 gem 'capistrano'
 gem 'sinatra'
-gem "sinatra-namespace"
 gem 'rake'
 gem 'activerecord'
 gem 'mysql2'
