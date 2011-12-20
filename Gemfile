@@ -4,7 +4,7 @@ gem 'rack'
 gem 'capistrano'
 gem 'sinatra'
 gem 'rake'
-gem 'activerecord'
+gem 'sinatra-activerecord'
 gem 'mysql2'
 gem 'json'
 
