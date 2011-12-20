@@ -1,3 +1,7 @@
 require 'active_record'
-class Product < ActiveRecord::Base
+module API
+  module V1
+    class Product < ActiveRecord::Base
+    end
+  end
 end
