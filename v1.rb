@@ -4,12 +4,12 @@ module API
   class V1 < Sinatra::Base
     
     configure do
-      ::ActiveRecord::Base.configurations = YAML::load(IO.read('config/database.yml'))
-      ::ActiveRecord::Base.establish_connection(settings.environment)
+      ActiveRecord::Base.configurations = YAML::load(IO.read('config/database.yml'))
+      ActiveRecord::Base.establish_connection(settings.environment)
     end
     
     before do
-      ::ActiveRecord::Base.connection.verify!
+      ActiveRecord::Base.connection.verify!
     end
     
     get '/' do
