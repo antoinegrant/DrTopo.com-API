@@ -1,4 +1,3 @@
-require File.join(File.dirname(__FILE__), '..', 'config/application.rb')
 require 'spec_helper'
 
 describe 'The API should, ' do
