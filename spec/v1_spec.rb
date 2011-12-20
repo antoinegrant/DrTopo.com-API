@@ -6,4 +6,8 @@ describe 'The API should, ' do
     get '/'
     last_response.status.should == 200
   end
+  it 'be in test mode' do
+    get '/env'
+    JSON.parse(last_response.body)['env'].should == 'test'
+  end
 end

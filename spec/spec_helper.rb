@@ -15,5 +15,5 @@ RSpec.configure do |conf|
 end
 
 def app
-  API::V1
+  API::V1::App
 end
