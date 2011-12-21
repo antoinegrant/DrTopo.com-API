@@ -3,9 +3,7 @@ ENV['RACK_ENV'] = 'test'
 require 'sinatra'
 require 'rack/test'
 
-# set test environment
 set :environment, :test
-
 
 RSpec.configure do |conf|
   conf.include Rack::Test::Methods

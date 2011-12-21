@@ -9,7 +9,9 @@ gem 'mysql2'
 gem 'json'
 
 group :test do
-   gem 'rack-test'
-   gem 'rspec'
-   gem 'database_cleaner'
+  gem 'autotest'
+  gem 'autotest-growl'
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'database_cleaner'
 end
