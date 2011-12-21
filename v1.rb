@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require File.expand_path('../models/product', __FILE__)
+require File.expand_path('../models/v1', __FILE__)
 
 module API
   module V1
@@ -15,8 +15,7 @@ module API
       end
       
       get '/' do
-        product = API::V1::Product.find(:all).first
-        product.to_json
+        "Welcome to the DrTopo API!"
       end
       
       get '/env' do
