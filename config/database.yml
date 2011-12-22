@@ -9,7 +9,6 @@ production:
   # username: agrantmysql1
   # password: Climbing111
   # host: mysql.drtopo.co
-  # socket: 
 
 development:
   adapter: sqlite3

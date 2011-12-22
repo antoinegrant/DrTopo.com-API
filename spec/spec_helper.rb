@@ -8,16 +8,16 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
   
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner[:active_record].strategy = :transaction
+    DatabaseCleaner[:active_record].clean_with(:truncation)
   end
 
   config.before(:all) do
-    DatabaseCleaner.start
+    DatabaseCleaner[:active_record].start
   end
 
   config.after(:all) do
-    DatabaseCleaner.clean
+    DatabaseCleaner[:active_record].clean
   end
   
 end

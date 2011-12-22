@@ -34,10 +34,13 @@ describe 'The API should,' do
       end
       
       it 'get a specific post' do
-        get '/examples/1'
+        pending 'Need to find a way to reset the auto_increment on Sqlite3'
+        
+        get '/examples/show/1'
         last_response.status.should == 200
         post = JSON.parse(last_response.body)
         post['name'].should == 'Name'
+        post['description'].should == 'Desc.'
       end
       
     end

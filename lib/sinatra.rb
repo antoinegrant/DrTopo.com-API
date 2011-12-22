@@ -13,29 +13,58 @@ module API
     end
     
     helpers do
-      def success(data=nil, format='json', headers={})
-        output = (data.nil? ? 'Success' : data.to_json)
-        return [200, headers, output]
+      def success(options={
+        :data    => nil,
+        :format  => 'json',
+        :headers => {}
+      })
+        if defined?(options['data']) && !options['data'].nil?
+          options['format'] = (!defined?(options['format']) || options['format'].nil? || options['format'] == '' ? 'json' : options['format'])
+          case options['format']
+          when 'xml'
+            options['data'] = options['data'].to_xml
+          else
+            options['data'] = options['data'].to_json
+          end
+          output = options['data']
+        else
+          output = 'Success'
+        end
+        return [200, options['headers'], output]
       end
-      def failure(message, code='', http_code=500, headers={}, backtrace=nil)
-        obj = {:code => code, :message => message, :backtrace => backtrace}
-        return [http_code, headers, obj.to_json]
+      def failure(options={
+        'message'   => 'Error',
+        'format'    => 'json',
+        'code'      => 'ERROR_GENERAL',
+        'http_code' => 500,
+        'headers'   => {},
+        'backtrace' => {}
+      })
+        options['format'] = (!defined?(options['format']) || options['format'].nil? || options['format'] == '' ? 'json' : options['format'])
+        obj = {:code => options['code'], :message => options['message'], :backtrace => options['backtrace']}
+        case options['format']
+        when 'xml'
+          obj = obj.to_xml
+        else
+          obj = obj.to_json
+        end
+        return [options['http_code'], options['headers'], obj]
       end
     end
     
     not_found do
-      failure("The URL you are trying to access does not exists. Poop!", 'PAGE_NOT_FOUND', 404, {}, env['sinatra.error'].backtrace.join("\n"))
+      failure({'message' => 'The URL you are trying to access does not exists. Poop!', 'code' => 'PAGE_NOT_FOUND', 'http_code' => 404, 'backtrace' => env['sinatra.error'].backtrace.join("\n")})
     end
     error do
-      failure(env['sinatra.error'].message, 'ERR_UNKNOWN', 500, {}, env['sinatra.error'].backtrace.join("\n"))
+      failure({'message' => env['sinatra.error'].message, 'code' => 'ERR_UNKNOWN', 'http_code' => 500, 'backtrace' => env['sinatra.error'].backtrace.join("\n")})
     end
     
     get '/' do
-      success("This is a bas Sinatra app!")
+      success({'data' => "This is a bas Sinatra app!"})
     end
     
     get '/env' do
-      success({'env' => settings.environment})
+      success({'data' => {'env' => settings.environment}})
     end
     
   end

@@ -17,7 +17,8 @@ module API
       end
       
       get '/' do
-        success("Welcome to the DrTopo API!")
+        success
+        #success({'data' => "Welcome to the DrTopo API!"})
       end
       
       
@@ -29,7 +30,7 @@ module API
         # Multiple path for the same method
         ['/?','/all'].each do |path|
           get path do
-            success(Example.find(:all))
+            success({'data' => Example.find(:all)})
           end
         end
         
@@ -42,17 +43,17 @@ module API
             )
             success
           rescue ActiveRecord::RecordInvalid => e
-            failure('Could not create!','EXAMPLES_CREATE',400)
+            failure({'message' => 'Could not create!', 'code' => 'EXAMPLES_CREATE', 'http_code' => 400})
           end
         end
         
-        get '/:id' do
+        get '/show/:id' do
           begin
-            success(Example.find(params[:id]))
+            post = Example.find(params[:id])
+            success({'data' => post})
           rescue ActiveRecord::RecordNotFound => e
-            failure("Could not find the post id: #{params[:id]}",'EXAMPLES_SHOW',400)
+            failure({'message' => "Could not find the post id: #{params[:id]}", 'code' => 'EXAMPLES_SHOW', 'http_code' => 400})
           end
-          
         end
         
         post '/update/:id' do
@@ -64,7 +65,7 @@ module API
             )
             success
           rescue Exception => e
-            failure('Could not create!','EXAMPLES_UPDATE',400)
+            failure({'message' => 'Could not create!', 'code' => 'EXAMPLES_UPDATE', 'http_code' => 400})
           end
         end
         
@@ -73,7 +74,7 @@ module API
             Example.destroy(params[:id])
             success
           rescue Exception => e
-            failure("Not item found with the id: #{params[:id]}",'EXAMPLES_DELETE',400)
+            failure({'message' => "Not item found with the id: #{params[:id]}", 'code' => 'EXAMPLES_DELETE', 'http_code' => 400})
           end
         end
         
