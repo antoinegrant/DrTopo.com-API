@@ -1,12 +1,17 @@
 source 'http://rubygems.org'
 
 gem 'rack'
+gem 'rake'
+
 gem 'capistrano'
+
 gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'rake'
+
+#gem 'mysql2'
+gem 'sqlite3'
 gem 'activerecord'
-gem 'mysql2'
+
 gem 'json'
 
 group :development do
@@ -14,6 +19,7 @@ group :development do
 end
 
 group :test do
+  gem 'sqlite3'
   gem 'autotest'
   gem 'autotest-growl'
   gem 'rack-test'

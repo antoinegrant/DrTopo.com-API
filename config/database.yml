@@ -1,26 +1,38 @@
 production:
-  adapter: mysql2
-  encoding: utf8
-  database: drtopov4
-  username: agrantmysql1
-  password: Climbing111
-  host: mysql.drtopo.co
-  socket: 
+  adapter: sqlite3
+  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000
+  # adapter: mysql2
+  # encoding: utf8
+  # database: drtopov4
+  # username: agrantmysql1
+  # password: Climbing111
+  # host: mysql.drtopo.co
+  # socket: 
 
 development:
-  adapter: mysql2
-  encoding: utf8
-  database: drtopov4_development
-  username: root
-  password: 
-  host: localhost
-  socket: /tmp/mysql.sock
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+  # adapter: mysql2
+  # encoding: utf8
+  # database: drtopov4_development
+  # username: root
+  # password: 
+  # host: localhost
+  # socket: /tmp/mysql.sock
   
 test:
-  adapter: mysql2
-  encoding: utf8
-  database: drtopov4_test
-  username: root
-  password: 
-  host: localhost
-  socket: /tmp/mysql.sock
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+  # adapter: mysql2
+  # encoding: utf8
+  # database: drtopov4_test
+  # username: root
+  # password: 
+  # host: localhost
+  # socket: /tmp/mysql.sock
