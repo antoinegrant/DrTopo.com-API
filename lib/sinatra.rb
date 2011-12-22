@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/namespace'
+require 'active_record'
 
 module API
   class Sinatra < Sinatra::Base
