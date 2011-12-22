@@ -1,39 +1,15 @@
-require 'sinatra/base'
-require 'sinatra/namespace'
+require File.expand_path('../lib/sinatra', __FILE__)
 require File.expand_path('../models/v1', __FILE__)
 
 module API
   module V1
-    class App < Sinatra::Base
+    class App < API::Sinatra
       register ::Sinatra::Namespace
       
       # Simple Auth example
       # use Rack::Auth::Basic, "Restricted Area" do |username, password|
       #   [username, password] == ['admin', 'admin']
       # end
-      
-      configure do
-        ActiveRecord::Base.configurations = YAML::load(IO.read('config/database.yml'))
-        ActiveRecord::Base.establish_connection(settings.environment)
-      end
-      
-      helpers do
-        def success(data={}, format='json', headers={})
-          output = (data == :empty ? '' : data.to_json)
-          return [200, headers, output]
-        end
-        def failure(message, code='', http_code=500, headers={}, backtrace=nil)
-          obj = {:code => code, :message => message, :backtrace => backtrace}
-          return [http_code, headers, obj.to_json]
-        end
-      end
-      
-      not_found do
-        failure("The URL you are trying to access does not exists. Poop!", 'PAGE_NOT_FOUND', 404, {}, env['sinatra.error'].backtrace.join("\n"))
-      end
-      error do
-        failure(env['sinatra.error'].message, 'ERR_UNKNOWN', 500, {}, env['sinatra.error'].backtrace.join("\n"))
-      end
       
       before do
         ActiveRecord::Base.connection.verify!
