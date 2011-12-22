@@ -17,16 +17,34 @@ module API
         ActiveRecord::Base.establish_connection(settings.environment)
       end
       
+      helpers do
+        def success(data={}, format='json', headers={})
+          output = (data == :empty ? '' : data.to_json)
+          return [200, headers, output]
+        end
+        def failure(message, code='', http_code=500, headers={}, backtrace=nil)
+          obj = {:code => code, :message => message, :backtrace => backtrace}
+          return [http_code, headers, obj.to_json]
+        end
+      end
+      
+      not_found do
+        failure("The URL you are trying to access does not exists. Poop!", 'PAGE_NOT_FOUND', 404, {}, env['sinatra.error'].backtrace.join("\n"))
+      end
+      error do
+        failure(env['sinatra.error'].message, 'ERR_UNKNOWN', 500, {}, env['sinatra.error'].backtrace.join("\n"))
+      end
+      
       before do
         ActiveRecord::Base.connection.verify!
       end
       
       get '/' do
-        "Welcome to the DrTopo API!"
+        success("Welcome to the DrTopo API!")
       end
       
       get '/env' do
-        {'env' => settings.environment}.to_json
+        success({'env' => settings.environment})
       end
       
       
@@ -37,19 +55,19 @@ module API
       namespace '/examples' do
         
         get '/?' do
-          Example.find(:all).to_json
+          success(Example.find(:all))
         end
         
-        get '/create' do
+        post '/create' do
           halt [400,"You must specify a anme and a description."] unless params.count > 0
           begin
             Example.create!(
               :name => params[:name],
               :description => params[:description]
             )
-            return [200,"ok"]
+            success
           rescue ActiveRecord::RecordInvalid => e
-            return [400,e.to_json]
+            failure('Could not create!','Examples:Create',400)
           end
         end
         

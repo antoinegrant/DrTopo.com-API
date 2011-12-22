@@ -1,3 +1,4 @@
 .DS_Store
 .autotest
 .rspec
+always_restart.txt
