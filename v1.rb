@@ -48,7 +48,7 @@ module API
         
         get '/:id' do
           begin
-            success(Example.find(params[:id]).attributes)
+            success(Example.find(params[:id]))
           rescue ActiveRecord::RecordNotFound => e
             failure("Could not find the post id: #{params[:id]}",'EXAMPLES_SHOW',400)
           end

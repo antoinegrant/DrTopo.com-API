@@ -34,10 +34,10 @@ describe 'The API should,' do
       end
       
       it 'get a specific post' do
-        get '/examples/all'
+        get '/examples/1'
         last_response.status.should == 200
         post = JSON.parse(last_response.body)
-        post['example']['name'].should == 'Name'
+        post['name'].should == 'Name'
       end
       
     end
