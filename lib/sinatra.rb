@@ -5,14 +5,16 @@ require 'active_record'
 module API
   class Sinatra < Sinatra::Base
     
+    set :environment, (ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development)
+    
     configure do
       ActiveRecord::Base.configurations = YAML::load(IO.read('config/database.yml'))
       ActiveRecord::Base.establish_connection(settings.environment)
     end
     
     helpers do
-      def success(data={}, format='json', headers={})
-        output = (data == :empty ? '' : data.to_json)
+      def success(data=nil, format='json', headers={})
+        output = (data.nil? ? 'Success' : data.to_json)
         return [200, headers, output]
       end
       def failure(message, code='', http_code=500, headers={}, backtrace=nil)
@@ -26,6 +28,14 @@ module API
     end
     error do
       failure(env['sinatra.error'].message, 'ERR_UNKNOWN', 500, {}, env['sinatra.error'].backtrace.join("\n"))
+    end
+    
+    get '/' do
+      success("This is a bas Sinatra app!")
+    end
+    
+    get '/env' do
+      success({'env' => settings.environment})
     end
     
   end

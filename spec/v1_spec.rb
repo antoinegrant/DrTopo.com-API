@@ -14,6 +14,37 @@ describe 'The API should,' do
       JSON.parse(last_response.body)['env'].should == 'test'
     end
     
+    
+    ####################
+    # START - Examples #
+    ####################
+    context 'test the examples,' do
+      
+      it 'get the list of posts' do
+        get '/examples/all'
+        last_response.status.should == 200
+      end
+      
+      it 'create a post' do
+        post '/examples/create', {
+          name: 'Name',
+          description: 'Desc.'
+        }
+        last_response.status.should == 200
+      end
+      
+      it 'get a specific post' do
+        get '/examples/all'
+        last_response.status.should == 200
+        post = JSON.parse(last_response.body)
+        post['example']['name'].should == 'Name'
+      end
+      
+    end
+    ##################
+    # END - Examples #
+    ##################
+    
   end
   
 end
