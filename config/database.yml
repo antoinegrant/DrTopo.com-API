@@ -11,17 +11,17 @@ production:
   # host: mysql.drtopo.co
 
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
-  timeout: 5000
-  # adapter: mysql2
-  # encoding: utf8
-  # database: drtopov4_development
-  # username: root
-  # password: 
-  # host: localhost
-  # socket: /tmp/mysql.sock
+  # adapter: sqlite3
+  # database: db/development.sqlite3
+  # pool: 5
+  # timeout: 5000
+  adapter: mysql2
+  encoding: utf8
+  database: drtopov4_development
+  username: root
+  password: 
+  host: localhost
+  socket: /tmp/mysql.sock
   
 test:
   adapter: sqlite3

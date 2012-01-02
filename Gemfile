@@ -24,5 +24,5 @@ group :test do
   gem 'autotest-growl'
   gem 'rack-test'
   gem 'rspec'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '~> 0.7.0'
 end

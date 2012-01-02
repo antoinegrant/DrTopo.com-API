@@ -13,6 +13,7 @@ module API
     end
     
     helpers do
+      
       def success(options={
         :data    => nil,
         :format  => 'json',
@@ -32,6 +33,7 @@ module API
         end
         return [200, options['headers'], output]
       end
+      
       def failure(options={
         'message'   => 'Error',
         'format'    => 'json',
@@ -50,17 +52,19 @@ module API
         end
         return [options['http_code'], options['headers'], obj]
       end
+      
     end
     
     not_found do
       failure({'message' => 'The URL you are trying to access does not exists. Poop!', 'code' => 'PAGE_NOT_FOUND', 'http_code' => 404, 'backtrace' => env['sinatra.error'].backtrace.join("\n")})
     end
+    
     error do
       failure({'message' => env['sinatra.error'].message, 'code' => 'ERR_UNKNOWN', 'http_code' => 500, 'backtrace' => env['sinatra.error'].backtrace.join("\n")})
     end
     
     get '/' do
-      success({'data' => "This is a bas Sinatra app!"})
+      success({'data' => "This is a base Sinatra app!"})
     end
     
     get '/env' do
