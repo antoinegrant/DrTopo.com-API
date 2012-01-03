@@ -16,6 +16,7 @@ gem 'json'
 
 group :development do
   gem 'shotgun'
+  gem 'sinatra-activerecord'
 end
 
 group :test do
