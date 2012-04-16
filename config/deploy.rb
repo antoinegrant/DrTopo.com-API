@@ -5,8 +5,6 @@ set :application, 'api.drtopo.co'  # Your app's location (domain or sub-domain n
 set :applicationdir, "/home/#{user}/#{application}"  # The standard Dreamhost setup
 
 # version control config
-set :scm_username, 'antoinegrant'
-set :scm_password, '247climbing'
 set :scm, 'git'
 set :repository,  "git@github.com:antoinegrant/DrTopo.com-API.git"
 set :deploy_via, :remote_cache
